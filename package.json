@@ -1,10 +1,10 @@
 {
   "name": "app",
   "version": "1.0.50",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "bun run --watch src/index.ts",
-    "build": "bun run ./builder/build.ts ./src/index.ts"
+    "dev": "bun run --watch src/index.ts"
   },
   "dependencies": {
     "elysia": "^1.4.21"
