@@ -5,18 +5,17 @@ import { join, resolve } from "path";
 const entryArg = Bun.argv[2];
 
 if (!entryArg) {
-  console.error("Usage: bun run build/build.ts <entry-file>");
+  console.error("Usage: bun run builder/build.ts <entry-file>");
   process.exit(1);
 }
 
 const entryFile = resolve(entryArg);
-const distRoot = resolve("dist");
-const outputRoot = join(distRoot, ".vercel", "output");
+const outputRoot = resolve(".vercel", "output");
 const functionName = "api";
 const functionDir = join(outputRoot, "functions", `${functionName}.func`);
 
 try {
-  await rm(distRoot, { recursive: true, force: true });
+  await rm(outputRoot, { recursive: true, force: true });
   await mkdir(functionDir, { recursive: true });
 
   const build = await Bun.build({
@@ -70,7 +69,7 @@ try {
     `${JSON.stringify(buildOutputConfig, null, 2)}\n`,
   );
 
-  console.log(`Build output written to ${distRoot}`);
+  console.log(`Build output written to ${outputRoot}`);
 } catch (error) {
   console.error(error);
   process.exit(1);
